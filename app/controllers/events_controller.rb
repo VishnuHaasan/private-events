@@ -44,6 +44,7 @@ class EventsController < ApplicationController
       redirect_to login_path
     end
   end
+  
   private
     def event_params
       params.require(:event).permit(:location,:description,:name,:date)
