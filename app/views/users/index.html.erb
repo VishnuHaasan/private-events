@@ -1,0 +1,19 @@
+<h1>Private events</h1>
+<% if session[:user_id]==nil %>
+  <%= link_to "SignUp",new_user_path %>
+  <%= link_to "Login",signin_path %>
+<% else %>
+  <% user = User.find(session[:user_id]) %>
+  <h3>Hello, <%= user.name %></h3>
+  <%= link_to "Your profile",user_path(user) %>
+  <h3>Upcoming events: </h3>
+  <% Event.future.each do |event| %>
+    <p><%= link_to event.name, event_path(event) %></p>
+  <% end %>
+  <h3>Previous events: </h3>
+  <% Event.past.each do |event| %>
+    <p><%= link_to event.name, event_path(event) %></p>
+  <% end %>
+  <%= link_to "New event",new_event_path %>
+  <%= link_to "Logout",logout_path %>
+<% end %>

@@ -1,0 +1,7 @@
+<%= form_with model: @user,method: :patch do |form|%>
+  <%= form.label :username,"Username: " %>
+  <%= form.text_field :username %><br />
+  <%= form.label :name,"Name: " %>
+  <%= form.text_field :name %><br />
+  <%= form.submit %>
+<% end %>

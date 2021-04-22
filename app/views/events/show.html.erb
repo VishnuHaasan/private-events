@@ -1,0 +1,20 @@
+<h1><%= @event.name %></h1>
+<h3>Event location: <%= @event.location %></h3>
+<h3>Event description: <%= @event.description %></h3>
+<h3>Event date: <%= @event.date %></h3>
+<% if @event.attendees %>
+  <h3>Event attendees: </h3>
+  <% @event.attendees.each do |attendee| %>
+    <%= link_to attendee.name, user_path(attendee) %><br />
+  <% end %>
+<% else %>
+  <h3>Be the first one.</h3>
+<% end %>
+<%= link_to "Register to join event.",invite_path(@event) %><br />
+<% if user_id = session[:user_id] %>
+  <% user = User.find(user_id) %>
+  <% if @event.attendees.include?(user) %>
+    <%= link_to "Unregister from the event.",destroy_invite_path(@event) %><br />
+  <% end %>
+<% end %>
+<%= link_to "Back to root path.",root_path %><br />
